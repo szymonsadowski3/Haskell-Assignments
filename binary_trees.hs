@@ -1,5 +1,3 @@
-import Text.Printf
-
 data BinTree a = Node a (BinTree a) (BinTree a) | Empty deriving Show
 
 ontwothree = Node 1 (Node 2 Empty Empty) (Node 3 Empty Empty)
