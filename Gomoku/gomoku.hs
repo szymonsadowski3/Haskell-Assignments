@@ -1,10 +1,11 @@
 {-# LANGUAGE FlexibleInstances #-}
 
 import Data.List
+import Data.List.Split
 
 --data
 testB = generateBoard 361
-filledB = [O , NotChecked , NotChecked , O , NotChecked , NotChecked , NotChecked , O , NotChecked , O , NotChecked , X , O , X , X , NotChecked , O , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , X , NotChecked , O , X , NotChecked , O , O , X , O , X , X , NotChecked , X , X , NotChecked , O , X , X , NotChecked , NotChecked , O , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , O , NotChecked , NotChecked , O , O , O , O , X , NotChecked , O , NotChecked , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , NotChecked , X , X , O , X , X , X , O , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , NotChecked , NotChecked , NotChecked , X , X , X , NotChecked , O , X , NotChecked , O , O , X , O , O , O , NotChecked , O , O , X , NotChecked , X , O , X , X , O , O , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , NotChecked , X , NotChecked , X , X , O , X , X , O , O , NotChecked , NotChecked , NotChecked , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , X , X , NotChecked , X , O , O , X , NotChecked , NotChecked , NotChecked , O , O , X , O , O , X , NotChecked , NotChecked , NotChecked , NotChecked , X , X , NotChecked , NotChecked , O , X , O , X , X , O , O , NotChecked , NotChecked , X , O , X , NotChecked , X , X , NotChecked , X , O , NotChecked , NotChecked , X , X , O , NotChecked , O , NotChecked , NotChecked , X , X , O , NotChecked , O , X , O , X , O , O , NotChecked , X , X , O , X , NotChecked , O , O , O , X , NotChecked , X , O , NotChecked , X , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , X , O , O , O , NotChecked , NotChecked , O , O , NotChecked , NotChecked , X , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , O , NotChecked , NotChecked , NotChecked , NotChecked , O , O , X , O , NotChecked , X , NotChecked , X , O , X , X , NotChecked , O , NotChecked , X , NotChecked , NotChecked , NotChecked , X , O , O , X , NotChecked , X , NotChecked , NotChecked , NotChecked , O , NotChecked , O , NotChecked , X , O , NotChecked , NotChecked , O , NotChecked , X , NotChecked , O , X , NotChecked , O , NotChecked , O , O , X , O , O , NotChecked , NotChecked , O , O , X , O , X , X , X , O , O , O , O , NotChecked , X , X , O , NotChecked , O , X , O , X , X , X , NotChecked , O , NotChecked , X , X , X , X , O , O , O , X , X , NotChecked , NotChecked , X , X , O , O , NotChecked , NotChecked , O , NotChecked , NotChecked , NotChecked , NotChecked , X , O , X , X]
+filledB = [X , X , X , O , X , X , NotChecked , X , NotChecked , X , X , X , O , X , X , NotChecked , O , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , X , NotChecked , O , X , NotChecked , O , O , X , O , X , X , NotChecked , X , X , NotChecked , O , X , X , NotChecked , NotChecked , O , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , O , NotChecked , NotChecked , O , O , O , O , X , NotChecked , O , NotChecked , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , NotChecked , X , X , O , X , X , X , O , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , NotChecked , NotChecked , NotChecked , X , X , X , NotChecked , O , X , NotChecked , O , O , X , O , O , O , NotChecked , O , O , X , NotChecked , X , O , X , X , O , O , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , NotChecked , X , NotChecked , X , X , O , X , X , O , O , NotChecked , NotChecked , NotChecked , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , X , X , NotChecked , X , O , O , X , NotChecked , NotChecked , NotChecked , O , O , X , O , O , X , NotChecked , NotChecked , NotChecked , NotChecked , X , X , NotChecked , NotChecked , O , X , O , X , X , O , O , NotChecked , NotChecked , X , O , X , NotChecked , X , X , NotChecked , X , O , NotChecked , NotChecked , X , X , O , NotChecked , O , NotChecked , NotChecked , X , X , O , NotChecked , O , X , O , X , O , O , NotChecked , X , X , O , X , NotChecked , O , O , O , X , NotChecked , X , O , NotChecked , X , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , X , O , O , O , NotChecked , NotChecked , O , O , NotChecked , NotChecked , X , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , O , NotChecked , NotChecked , NotChecked , NotChecked , O , O , X , O , NotChecked , X , NotChecked , X , O , X , X , NotChecked , O , NotChecked , X , NotChecked , NotChecked , NotChecked , X , O , O , X , NotChecked , X , NotChecked , NotChecked , NotChecked , O , NotChecked , O , NotChecked , X , O , NotChecked , NotChecked , O , NotChecked , X , NotChecked , O , X , NotChecked , O , NotChecked , O , O , X , O , O , NotChecked , NotChecked , O , O , X , O , X , X , X , O , O , O , O , NotChecked , X , X , O , NotChecked , O , X , O , X , X , X , NotChecked , O , NotChecked , X , X , X , X , O , O , O , X , X , NotChecked , NotChecked , X , X , O , O , NotChecked , NotChecked , O , NotChecked , NotChecked , NotChecked , NotChecked , X , O , X , X]
 list = [1..9]
 list3 = [O,X,NotChecked,X,O,NotChecked,NotChecked,X,O]
 --
@@ -66,13 +67,26 @@ indicesInCol col_num board symb = elemIndices (symb) (getNthCol col_num board)
 distancesInRow row_num board symb = sum ([x | x <- diffs (indicesInRow row_num board symb)])
 distancesInCol col_num board symb = sum ([x | x <- diffs (indicesInCol col_num board symb)])
 
-evalRow row_num board symb = (howManySymbolsInRow row_num board symb)^3 - (distancesInRow row_num board symb)^2
-evalCol col_num board symb = (howManySymbolsInCol col_num board symb)^3 - (distancesInCol col_num board symb)^2
+evalRowOld row_num board symb = (howManySymbolsInRow row_num board symb)^3 - (distancesInRow row_num board symb)^2
+evalColOld col_num board symb = (howManySymbolsInCol col_num board symb)^3 - (distancesInCol col_num board symb)^2
 
-evalRows board symb = sum [evalRow index board symb | index <- [0..(boardHowManyRows board)]]
-evalCols board symb = sum [evalCol index board symb | index <- [0..(boardHowManyRows board)]]
+evalRowsOld board symb = sum [evalRowOld index board symb | index <- [0..(boardHowManyRows board)]]
+evalColsOld board symb = sum [evalColOld index board symb | index <- [0..(boardHowManyRows board)]]
 
-evalBoard board symb = (evalRows board symb) + (evalCols board symb)
+evalBoardOld board symb = (evalRowsOld board symb) + (evalColsOld board symb)
+
+indicesDiffs row_num board symb = diffs (indicesInRow row_num board symb)
+
+getSymbGroups row_num board symb = splitOneOf [2..19] (indicesDiffs row_num board symb)
+
+getGroupsLengths row_num board symb = [length x + 1 | x <- (getSymbGroups row_num board symb)]
+
+evalRow row_num board symb = sum [evalChain x | x <- getGroupsLengths row_num board symb]
+
+evalChain 2 = 1.0
+evalChain 3 = 5.0
+evalChain 4 = 100.0
+evalChain x = 0
 
 -- main = do  
 --     putStrLn "Hello, type [X | O | _]: "  
