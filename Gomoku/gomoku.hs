@@ -2,6 +2,7 @@
 
 import Data.List
 import Data.List.Split
+import Data.Universe.Helpers
 
 --data
 testB = generateBoard 361
@@ -75,20 +76,53 @@ evalColsOld board symb = sum [evalColOld index board symb | index <- [0..(boardH
 
 evalBoardOld board symb = (evalRowsOld board symb) + (evalColsOld board symb)
 
-indicesDiffs row_num board symb = diffs (indicesInRow row_num board symb)
 
-getSymbGroups row_num board symb = splitOneOf [2..19] (indicesDiffs row_num board symb)
+indicesDiffsRow row_num board symb = diffs (indicesInRow row_num board symb)
+getSymbGroupsRow row_num board symb = splitOneOf [2..19] (indicesDiffsRow row_num board symb)
+getGroupsLengthsRow row_num board symb = [length x + 1 | x <- (getSymbGroupsRow row_num board symb)]
+evalRow row_num board symb = sum [evalChain x | x <- getGroupsLengthsRow row_num board symb]
 
-getGroupsLengths row_num board symb = [length x + 1 | x <- (getSymbGroups row_num board symb)]
 
-evalRow row_num board symb = sum [evalChain x | x <- getGroupsLengths row_num board symb]
+indicesDiffsCol col_num board symb = diffs (indicesInCol col_num board symb)
+getSymbGroupsCol col_num board symb = splitOneOf [2..19] (indicesDiffsCol col_num board symb)
+getGroupsLengthsCol col_num board symb = [length x + 1 | x <- (getSymbGroupsCol col_num board symb)]
+evalCol col_num board symb = sum [evalChain x | x <- getGroupsLengthsCol col_num board symb]
+
 
 evalChain 2 = 1.0
 evalChain 3 = 5.0
 evalChain 4 = 100.0
 evalChain x = 0
 
+
+get2dArrayFromList board = chunksOf (boardHowManyRows board) board
+
+getDiagonals board = diagonals (get2dArrayFromList board)
+
+getDiagonalsCw board = diagonals (cwRotate (get2dArrayFromList board))
+
+cwRotate = map reverse . transpose
+
+
+getGroupsDiagonals board symb = [splitOneOf [2..19] (diffs (elemIndices (symb) x)) | x <- getDiagonals board]
+getGroupsLengthsDiagonals board symb = [length x + 1 | x <- concat $ getGroupsDiagonals board symb]
+evalDiagonals board symb = sum [evalChain x | x <- getGroupsLengthsDiagonals board symb]
+
+
+getGroupsDiagonalsCw board symb = [splitOneOf [2..19] (diffs (elemIndices (symb) x)) | x <- getDiagonalsCw board]
+getGroupsLengthsDiagonalsCw board symb = [length x + 1 | x <- concat $ getGroupsDiagonalsCw board symb]
+evalDiagonalsCw board symb = sum [evalChain x | x <- getGroupsLengthsDiagonalsCw board symb]
+
+
+
+evalRows board symb = sum [evalRow index board symb | index <- [0..(boardHowManyRows board)]]
+evalCols board symb = sum [evalCol index board symb | index <- [0..(boardHowManyRows board)]]
+
+evalBoard board symb = (evalRows board symb) + (evalCols board symb) + (evalDiagonals board symb) + (evalDiagonalsCw board symb)
+
 -- main = do  
 --     putStrLn "Hello, type [X | O | _]: "  
 --     cell <- getLine  
 --     putStrLn ((readCell cell))  
+
+-- getDiagonals board = [x | x <- zip [0..(length boardL)] boardL]
