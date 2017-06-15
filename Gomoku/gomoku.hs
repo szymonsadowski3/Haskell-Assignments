@@ -4,6 +4,8 @@ import Data.List
 import Data.List.Split
 import Data.Universe.Helpers
 
+--showing board without escaping: putStrLn (show filledB)
+
 --data
 testB = generateBoard 361
 filledB = [X , X , X , O , X , X , NotChecked , X , NotChecked , X , X , X , O , X , X , NotChecked , O , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , X , NotChecked , O , X , NotChecked , O , O , X , O , X , X , NotChecked , X , X , NotChecked , O , X , X , NotChecked , NotChecked , O , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , O , NotChecked , NotChecked , O , O , O , O , X , NotChecked , O , NotChecked , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , NotChecked , X , X , O , X , X , X , O , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , NotChecked , NotChecked , NotChecked , X , X , X , NotChecked , O , X , NotChecked , O , O , X , O , O , O , NotChecked , O , O , X , NotChecked , X , O , X , X , O , O , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , NotChecked , X , NotChecked , X , X , O , X , X , O , O , NotChecked , NotChecked , NotChecked , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , X , X , NotChecked , X , O , O , X , NotChecked , NotChecked , NotChecked , O , O , X , O , O , X , NotChecked , NotChecked , NotChecked , NotChecked , X , X , NotChecked , NotChecked , O , X , O , X , X , O , O , NotChecked , NotChecked , X , O , X , NotChecked , X , X , NotChecked , X , O , NotChecked , NotChecked , X , X , O , NotChecked , O , NotChecked , NotChecked , X , X , O , NotChecked , O , X , O , X , O , O , NotChecked , X , X , O , X , NotChecked , O , O , O , X , NotChecked , X , O , NotChecked , X , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , X , O , O , O , NotChecked , NotChecked , O , O , NotChecked , NotChecked , X , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , O , NotChecked , NotChecked , NotChecked , NotChecked , O , O , X , O , NotChecked , X , NotChecked , X , O , X , X , NotChecked , O , NotChecked , X , NotChecked , NotChecked , NotChecked , X , O , O , X , NotChecked , X , NotChecked , NotChecked , NotChecked , O , NotChecked , O , NotChecked , X , O , NotChecked , NotChecked , O , NotChecked , X , NotChecked , O , X , NotChecked , O , NotChecked , O , O , X , O , O , NotChecked , NotChecked , O , O , X , O , X , X , X , O , O , O , O , NotChecked , X , X , O , NotChecked , O , X , O , X , X , X , NotChecked , O , NotChecked , X , X , X , X , O , O , O , X , X , NotChecked , NotChecked , X , X , O , O , NotChecked , NotChecked , O , NotChecked , NotChecked , NotChecked , NotChecked , X , O , X , X]
@@ -25,8 +27,8 @@ toString O = "O"
 instance Show (Cell) where
     show = toString
 
--- instance {-# OVERLAPPING #-} Show [Cell] where
---     show = toStrBoard
+instance {-# OVERLAPPING #-} Show [Cell] where
+    show = toStrBoard
 
 
 generateBoard :: Int -> Board
@@ -44,8 +46,11 @@ toStrBoard boardL = " " ++ (intercalate " " [yielder (fst x) (snd x) (boardHowMa
 
 readCell :: [Char] -> Cell
 readCell "X" = X
+readCell "x" = X
 readCell "O" = O
+readCell "o" = O
 readCell "_" = NotChecked
+readCell x = NotChecked
 
 boardHowManyRows board = isqrt (length board)
 
@@ -120,9 +125,18 @@ evalCols board symb = sum [evalCol index board symb | index <- [0..(boardHowMany
 
 evalBoard board symb = (evalRows board symb) + (evalCols board symb) + (evalDiagonals board symb) + (evalDiagonalsCw board symb)
 
--- main = do  
---     putStrLn "Hello, type [X | O | _]: "  
---     cell <- getLine  
---     putStrLn ((readCell cell))  
+-- IO
 
--- getDiagonals board = [x | x <- zip [0..(length boardL)] boardL]
+
+
+getUserChoice symb = do
+    putStrLn ((toString symb) ++ " | Type in row: ")
+    row <- getLine
+    return (if (((read row :: Int) >= 0) && ((read row :: Int) <= 19)) then (read row :: Int) else 0)
+
+
+main = do  
+    putStrLn "Hello, type [X | O | _]: "  
+    cell <- getLine  
+    putStrLn (toString (readCell cell))  
+
