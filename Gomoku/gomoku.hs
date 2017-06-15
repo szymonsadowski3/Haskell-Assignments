@@ -1,16 +1,26 @@
-{-# LANGUAGE FlexibleInstances #-}
+
+--{-# LANGUAGE FlexibleInstances #-}
 
 import Data.List
 import Data.List.Split
 import Data.Universe.Helpers
+import MyTree
 
 --showing board without escaping: putStrLn (show filledB)
+
+--UTIL
+replaceElem n newElement xs = take n xs ++ [newElement] ++ drop (n + 1) xs
+---
 
 --data
 testB = generateBoard 361
 filledB = [X , X , X , O , X , X , NotChecked , X , NotChecked , X , X , X , O , X , X , NotChecked , O , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , X , NotChecked , O , X , NotChecked , O , O , X , O , X , X , NotChecked , X , X , NotChecked , O , X , X , NotChecked , NotChecked , O , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , O , NotChecked , NotChecked , O , O , O , O , X , NotChecked , O , NotChecked , NotChecked , NotChecked , X , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , O , O , NotChecked , X , X , O , X , X , X , O , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , NotChecked , NotChecked , NotChecked , X , X , X , NotChecked , O , X , NotChecked , O , O , X , O , O , O , NotChecked , O , O , X , NotChecked , X , O , X , X , O , O , NotChecked , X , NotChecked , O , NotChecked , NotChecked , X , NotChecked , NotChecked , X , NotChecked , X , X , O , X , X , O , O , NotChecked , NotChecked , NotChecked , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , X , X , NotChecked , X , O , O , X , NotChecked , NotChecked , NotChecked , O , O , X , O , O , X , NotChecked , NotChecked , NotChecked , NotChecked , X , X , NotChecked , NotChecked , O , X , O , X , X , O , O , NotChecked , NotChecked , X , O , X , NotChecked , X , X , NotChecked , X , O , NotChecked , NotChecked , X , X , O , NotChecked , O , NotChecked , NotChecked , X , X , O , NotChecked , O , X , O , X , O , O , NotChecked , X , X , O , X , NotChecked , O , O , O , X , NotChecked , X , O , NotChecked , X , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , X , NotChecked , X , O , X , O , O , O , NotChecked , NotChecked , O , O , NotChecked , NotChecked , X , NotChecked , O , NotChecked , NotChecked , O , NotChecked , O , X , O , NotChecked , NotChecked , NotChecked , NotChecked , O , O , X , O , NotChecked , X , NotChecked , X , O , X , X , NotChecked , O , NotChecked , X , NotChecked , NotChecked , NotChecked , X , O , O , X , NotChecked , X , NotChecked , NotChecked , NotChecked , O , NotChecked , O , NotChecked , X , O , NotChecked , NotChecked , O , NotChecked , X , NotChecked , O , X , NotChecked , O , NotChecked , O , O , X , O , O , NotChecked , NotChecked , O , O , X , O , X , X , X , O , O , O , O , NotChecked , X , X , O , NotChecked , O , X , O , X , X , X , NotChecked , O , NotChecked , X , X , X , X , O , O , O , X , X , NotChecked , NotChecked , X , X , O , O , NotChecked , NotChecked , O , NotChecked , NotChecked , NotChecked , NotChecked , X , O , X , X]
 list = [1..9]
+tiny = [X,NotChecked,NotChecked,NotChecked]
+tiny2 = [X,X,X,NotChecked,NotChecked,NotChecked,NotChecked,NotChecked,NotChecked]
 list3 = [O,X,NotChecked,X,O,NotChecked,NotChecked,X,O]
+soblank = [NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked , NotChecked ]
+sofull = [X , O , O , X , O , O , O , X , X , O , O , X , O , O , X , X , X , X , X , X , X , O , O , X , O , X , X , O , X , O , O , O , X , X , O , O , O , X , X , X , X , X , X , O , O , X , X , X , O , X , O , O , O , X , O , X , X , O , O , X , O , X , X , X , O , O , O , O , O , O , X , O , O , X , O , O , X , X , O , X , O , X , X , X , X , X , X , O , O , O , X , X , X , O , X , O , O , X , X , X , X , O , X , O , O , O , X , X , O , O , X , O , X , X , X , X , X , X , O , O , O , X , O , X , X , X , O , X , O , X , O , O , O , O , X , X , X , X , O , X , O , O , O , X , O , X , X , O , O , X , X , O , O , O , X , X , O , O , O , O , O , X , O , X , O , O , O , X , O , X , O , X , O , O , X , O , X , O , X , X , X , X , X , O , O , O , X , O , O , O , X , X , O , X , O , O , X , O , O , O , X , X , X , O , X , X , X , O , O , O , X , X , X , O , X , X , X , X , X , X , X , O , X , O , O , X , X , O , X , O , O , X , O , O , O , X , X , X , O , O , O , O , X , X , X , X , X , X , X , O , X , X , O , X , O , X , X , O , O , O , X , X , O , O , O , X , X , O , O , O , O , X , O , O , X , X , X , X , X , X , O , O , X , O , X , O , X , O , X , X , O , O , O , O , X , O , X , X , O , X , O , O , O , O , O , O , O , O , O , O , O , O , X , O , X , O , X , O , X , O , X , O , O , O , X , O , X , X , O , O , X , X , O , X , X , O , X , X , X , X , O , X , X , X , X , X , X , O , O , O , O , X , X , O , X , O , O , X , O , O , X ]
 --
 
 data Cell = 
@@ -20,6 +30,10 @@ data Cell =
 
 type Board = [Cell]
 
+oppositeCell X = O
+oppositeCell O = X
+oppositeCell _ = NotChecked
+
 toString NotChecked = "_"
 toString X = "X"
 toString O = "O"
@@ -27,8 +41,8 @@ toString O = "O"
 instance Show (Cell) where
     show = toString
 
-instance {-# OVERLAPPING #-} Show [Cell] where
-    show = toStrBoard
+-- instance {-# OVERLAPPING #-} Show [Cell] where
+--     show = toStrBoard
 
 
 generateBoard :: Int -> Board
@@ -127,16 +141,31 @@ evalBoard board symb = (evalRows board symb) + (evalCols board symb) + (evalDiag
 
 -- IO
 
-
-
 getUserChoice symb = do
     putStrLn ((toString symb) ++ " | Type in row: ")
     row <- getLine
     return (if (((read row :: Int) >= 0) && ((read row :: Int) <= 19)) then (read row :: Int) else 0)
 
-
 main = do  
-    putStrLn "Hello, type [X | O | _]: "  
-    cell <- getLine  
-    putStrLn (toString (readCell cell))  
+    row <- getUserChoice X
+    putStrLn (show row)
 
+findAvailableMoves board = [(quot x (boardHowManyRows board), mod x (boardHowManyRows board)) | x <- elemIndices NotChecked board]
+
+generateAvailableBoards whoseMove currState = [replaceElem ((fst x)*(boardHowManyRows currState) + (snd x)) whoseMove currState | x <- findAvailableMoves currState]
+
+generateGameTree whoseMove initState = Node (evalBoard initState (oppositeCell whoseMove), evalBoard initState whoseMove, initState) [Node (evalBoard x (oppositeCell whoseMove), evalBoard x whoseMove, x) [] | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeTwoDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTree (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeThreeDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeTwoDepths (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeFourDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeThreeDepths (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeFiveDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeFourDepths (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeSixDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeFiveDepths (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
+
+generateGameTreeDepths whoseMove initState 1 = Node (evalBoard initState (oppositeCell whoseMove), evalBoard initState whoseMove, initState) [Node (evalBoard x (oppositeCell whoseMove), evalBoard x whoseMove, x) [] | x <- (generateAvailableBoards whoseMove initState)]
+generateGameTreeDepths whoseMove initState depth = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeDepths (oppositeCell whoseMove) x (depth - 1)| x <- (generateAvailableBoards whoseMove initState)]
+-- generateGameTreeFourDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameThreeDepths whoseMove x | x <- (generateAvailableBoards whoseMove initState)]
