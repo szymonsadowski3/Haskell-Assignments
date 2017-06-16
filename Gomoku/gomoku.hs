@@ -154,6 +154,17 @@ findAvailableMoves board = [(quot x (boardHowManyRows board), mod x (boardHowMan
 
 generateAvailableBoards whoseMove currState = [replaceElem ((fst x)*(boardHowManyRows currState) + (snd x)) whoseMove currState | x <- findAvailableMoves currState]
 
+--OPTIMALIZATION
+takeRange cutRatio array = (drop cutRatio . take ((length array) - cutRatio) $ array)
+
+getBoardRows board = [getNthRow x board | x <- [0..(boardHowManyRows board)]]
+
+getCutBoard cutRatio board = concat [takeRange cutRatio x | x <- takeRange cutRatio (get2dArrayFromList board)]
+---------------------
+
+
+generateAvailableBoardsOptimized whoseMove currState ommitRatio = [replaceElem ((fst x)*(boardHowManyRows currState) + (snd x)) whoseMove currState | x <- findAvailableMoves $ getCutBoard ommitRatio currState]
+
 generateGameTree whoseMove initState = Node (evalBoard initState (oppositeCell whoseMove), evalBoard initState whoseMove, initState) [Node (evalBoard x (oppositeCell whoseMove), evalBoard x whoseMove, x) [] | x <- (generateAvailableBoards whoseMove initState)]
 
 generateGameTreeTwoDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTree (oppositeCell whoseMove) x | x <- (generateAvailableBoards whoseMove initState)]
@@ -169,3 +180,5 @@ generateGameTreeSixDepths whoseMove initState = Node (evalBoard initState whoseM
 generateGameTreeDepths whoseMove initState 1 = Node (evalBoard initState (oppositeCell whoseMove), evalBoard initState whoseMove, initState) [Node (evalBoard x (oppositeCell whoseMove), evalBoard x whoseMove, x) [] | x <- (generateAvailableBoards whoseMove initState)]
 generateGameTreeDepths whoseMove initState depth = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeDepths (oppositeCell whoseMove) x (depth - 1)| x <- (generateAvailableBoards whoseMove initState)]
 -- generateGameTreeFourDepths whoseMove initState = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameThreeDepths whoseMove x | x <- (generateAvailableBoards whoseMove initState)]
+generateGameTreeDepthsOptimized whoseMove initState 1 = Node (evalBoard initState (oppositeCell whoseMove), evalBoard initState whoseMove, initState) [Node (evalBoard x (oppositeCell whoseMove), evalBoard x whoseMove, x) [] | x <- (generateAvailableBoardsOptimized whoseMove initState 8)]
+generateGameTreeDepthsOptimized whoseMove initState depth = Node (evalBoard initState whoseMove,  evalBoard initState (oppositeCell whoseMove), initState) [generateGameTreeDepths (oppositeCell whoseMove) x (depth - 1)| x <- (generateAvailableBoardsOptimized whoseMove initState (5 + depth))]
