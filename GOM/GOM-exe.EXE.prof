@@ -1,0 +1,186 @@
+	Sat Jun 17 01:12 2017 Time and Allocation Profiling Report  (Final)
+
+	   GOM-exe.EXE +RTS -N -p -N -RTS -flagBefore -flagAfter
+
+	total time  =        4.25 secs   (4249 ticks @ 1000 us, 1 processor)
+	total alloc = 9,748,981,776 bytes  (excludes profiling overheads)
+
+COST CENTRE        MODULE                    SRC                                                %time %alloc
+
+cwRotate           Main                      app\Main.hs:67:1-34                                 16.3   25.3
+postProcess        Data.List.Split.Internals src\Data\List\Split\Internals.hs:(163,1)-(168,45)   13.3   10.6
+indicesInRows      Main                      app\Main.hs:88:1-62                                 13.1    5.1
+diagonals.go       Data.Universe.Helpers     Data\Universe\Helpers.hs:(42,9)-(45,41)             11.8   16.2
+split              Data.List.Split.Internals src\Data\List\Split\Internals.hs:249:1-68            8.0    9.8
+evalBoardRowWise   Main                      app\Main.hs:97:1-80                                  5.9    7.7
+getSymbGroups      Main                      app\Main.hs:91:1-95                                  3.8    4.1
+diagonals.go.ts    Data.Universe.Helpers     Data\Universe\Helpers.hs:45:23-41                    3.4    5.0
+getChainsRowWise   Main                      app\Main.hs:92:1-80                                  3.0    4.5
+doDrop             Data.List.Split.Internals src\Data\List\Split\Internals.hs:(172,1)-(173,14)    2.5    2.5
+indicesDiffsInRows Main                      app\Main.hs:89:1-73                                  2.3    3.7
+splitOneOf         Data.List.Split.Internals src\Data\List\Split\Internals.hs:400:1-39            2.0    0.8
+takeRange          Main                      app\Main.hs:100:1-85                                 1.6    2.0
+diffs              Main                      app\Main.hs:(69,1)-(70,35)                           1.1    0.1
+splitInternal      Data.List.Split.Internals src\Data\List\Split\Internals.hs:(139,1)-(148,70)    1.1    0.0
+getCutBoard        Main                      app\Main.hs:101:1-92                                 0.5    1.3
+
+
+                                                                                                                                        individual      inherited
+COST CENTRE                              MODULE                    SRC                                               no.     entries  %time %alloc   %time %alloc
+
+MAIN                                     MAIN                      <built-in>                                         99          0    0.0    0.0   100.0  100.0
+ CAF                                     GHC.IO.Encoding.CodePage  <entire-module>                                   183          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.IO.Encoding           <entire-module>                                   177          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.Conc.Windows          <entire-module>                                   174          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.TopHandler            <entire-module>                                   173          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.IO.Handle.Text        <entire-module>                                   172          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.IO.Handle.FD          <entire-module>                                   169          0    0.0    0.0     0.0    0.0
+ CAF                                     GHC.IO.Exception          <entire-module>                                   168          0    0.0    0.0     0.0    0.0
+ CAF:$fShowBoard2                        Main                      <no location info>                                111          0    0.0    0.0     0.0    0.0
+  show                                   Main                      app\Main.hs:38:5-74                               223          0    0.0    0.0     0.0    0.0
+ CAF:$fShowCell2                         Main                      <no location info>                                106          0    0.0    0.0     0.0    0.0
+  toString                               Main                      app\Main.hs:(17,1)-(19,16)                        331          0    0.0    0.0     0.0    0.0
+ CAF:$fShowCell3                         Main                      <no location info>                                107          0    0.0    0.0     0.0    0.0
+  toString                               Main                      app\Main.hs:(17,1)-(19,16)                        309          0    0.0    0.0     0.0    0.0
+ CAF:$fShowCell4                         Main                      <no location info>                                108          0    0.0    0.0     0.0    0.0
+  toString                               Main                      app\Main.hs:(17,1)-(19,16)                        220          0    0.0    0.0     0.0    0.0
+ CAF:$fShowCell_$cshow                   Main                      app\Main.hs:27:5-8                                109          0    0.0    0.0     0.0    0.0
+  show                                   Main                      app\Main.hs:27:5-19                               218          1    0.0    0.0     0.0    0.0
+ CAF:cwRotate_rHc                        Main                      app\Main.hs:67:1-8                                119          0    0.0    0.0     0.0    0.0
+  cwRotate                               Main                      app\Main.hs:67:1-34                               284          1    0.0    0.0     0.0    0.0
+ CAF:defaultSplitter                     Data.List.Split.Internals src\Data\List\Split\Internals.hs:58:1-15          158          0    0.0    0.0     0.0    0.0
+  defaultSplitter                        Data.List.Split.Internals src\Data\List\Split\Internals.hs:(58,1)-(63,28)   267          1    0.0    0.0     0.0    0.0
+ CAF:diagonals                           Data.Universe.Helpers     Data\Universe\Helpers.hs:39:1-9                   140          0    0.0    0.0     0.0    0.0
+  diagonals                              Data.Universe.Helpers     Data\Universe\Helpers.hs:(39,1)-(45,41)           286          1    0.0    0.0     0.0    0.0
+ CAF:eloo                                Main                      app\Main.hs:57:1-4                                118          0    0.0    0.0     0.0    0.0
+  eloo                                   Main                      app\Main.hs:57:1-23                               203          1    0.0    0.0     0.0    0.0
+   generateBoard                         Main                      app\Main.hs:46:1-56                               204          1    0.0    0.0     0.0    0.0
+ CAF:lvl14_r60F                          Main                      <no location info>                                121          0    0.0    0.0     0.0    0.0
+  evalBoardRowWise                       Main                      app\Main.hs:97:1-80                               321          0    0.0    0.0     0.0    0.0
+   getChainsRowWise                      Main                      app\Main.hs:92:1-80                               322          0    0.0    0.0     0.0    0.0
+    getSymbGroups                        Main                      app\Main.hs:91:1-95                               323          0    0.0    0.0     0.0    0.0
+ CAF:lvl18_r60K                          Main                      <no location info>                                123          0    0.0    0.0     0.0    0.0
+  evalBoardRowWise                       Main                      app\Main.hs:97:1-80                               263          0    0.0    0.0     0.0    0.0
+   getChainsRowWise                      Main                      app\Main.hs:92:1-80                               264          0    0.0    0.0     0.0    0.0
+    getSymbGroups                        Main                      app\Main.hs:91:1-95                               265          0    0.0    0.0     0.0    0.0
+     splitOneOf                          Data.List.Split.Internals src\Data\List\Split\Internals.hs:400:1-39         266          0    0.0    0.0     0.0    0.0
+      dropDelims                         Data.List.Split.Internals src\Data\List\Split\Internals.hs:295:1-39         268          1    0.0    0.0     0.0    0.0
+ CAF:lvl20_r60S                          Main                      <no location info>                                124          0    0.0    0.0     0.0    0.0
+  availNextBoards                        Main                      app\Main.hs:116:1-150                             233          0    0.0    0.0     0.0    0.0
+   availMoves                            Main                      app\Main.hs:112:1-149                             234          0    0.0    0.0     0.0    0.0
+ CAF:lvl6_r60v                           Main                      <no location info>                                114          0    0.0    0.0     0.0    0.0
+  eloo                                   Main                      app\Main.hs:57:1-23                               215          0    0.0    0.0     0.0    0.0
+   generateBoard                         Main                      app\Main.hs:46:1-56                               216          0    0.0    0.0     0.0    0.0
+    generateRow                          Main                      app\Main.hs:45:1-42                               217          0    0.0    0.0     0.0    0.0
+ CAF:lvl7_r60w                           Main                      <no location info>                                115          0    0.0    0.0     0.0    0.0
+  eloo                                   Main                      app\Main.hs:57:1-23                               212          0    0.0    0.0     0.0    0.0
+   generateBoard                         Main                      app\Main.hs:46:1-56                               213          0    0.0    0.0     0.0    0.0
+    generateRow                          Main                      app\Main.hs:45:1-42                               214          0    0.0    0.0     0.0    0.0
+ CAF:lvl_r60n                            Main                      <no location info>                                110          0    0.0    0.0     0.0    0.0
+  show                                   Main                      app\Main.hs:38:5-74                               221          0    0.0    0.0     0.0    0.0
+   dispRow                               Main                      app\Main.hs:62:1-49                               222          0    0.0    0.0     0.0    0.0
+ CAF:main1                               Main                      <no location info>                                135          0    0.0    0.0     0.0    0.0
+  main                                   Main                      app\Main.hs:(157,1)-(159,20)                      198          1    0.0    0.0     0.0    0.0
+ CAF:main3                               Main                      <no location info>                                133          0    0.0    0.0     0.0    0.0
+  main                                   Main                      app\Main.hs:(157,1)-(159,20)                      200          0    0.0    0.0     0.0    0.0
+   mainLoop                              Main                      app\Main.hs:(147,1)-(153,47)                      201          1    0.0    0.0     0.0    0.0
+ CAF:main4                               Main                      <no location info>                                117          0    0.0    0.0     0.0    0.0
+  eloo                                   Main                      app\Main.hs:57:1-23                               206          0    0.0    0.0     0.0    0.0
+   generateBoard                         Main                      app\Main.hs:46:1-56                               207          0    0.0    0.0     0.0    0.0
+    generateRow                          Main                      app\Main.hs:45:1-42                               211         11    0.0    0.0     0.0    0.0
+ CAF:main5                               Main                      <no location info>                                116          0    0.0    0.0     0.0    0.0
+  eloo                                   Main                      app\Main.hs:57:1-23                               208          0    0.0    0.0     0.0    0.0
+   generateBoard                         Main                      app\Main.hs:46:1-56                               209          0    0.0    0.0     0.0    0.0
+ main                                    Main                      app\Main.hs:(157,1)-(159,20)                      199          0    0.0    0.0   100.0  100.0
+  mainLoop                               Main                      app\Main.hs:(147,1)-(153,47)                      202          6    0.0    0.0   100.0  100.0
+   mainLoop.choice                       Main                      app\Main.hs:151:9-52                              224          6    0.0    0.0   100.0  100.0
+    bestMove                             Main                      app\Main.hs:(128,1)-(130,99)                      225          6    0.0    0.0   100.0  100.0
+     byComplex                           Main                      app\Main.hs:143:1-44                              238       1309    0.0    0.0     0.0    0.0
+     ==                                  Main                      app\Main.hs:15:22-23                              226          6    0.0    0.0     0.0    0.0
+     minimalizationLayer                 Main                      app\Main.hs:(123,1)-(126,76)                      227          6    0.0    0.0   100.0  100.0
+      byF                                Main                      app\Main.hs:141:1-29                              245     153951    0.0    0.0     0.0    0.0
+      getTail                            Main                      app\Main.hs:174:1-28                              239        660    0.0    0.0     0.0    0.0
+      ==                                 Main                      app\Main.hs:15:22-23                              237          6    0.0    0.0     0.0    0.0
+      minimalizationLayer.trtail         Main                      app\Main.hs:126:15-76                             228          6    0.0    0.0    99.9  100.0
+       generateGameTreeDepths            Main                      app\Main.hs:(119,1)-(120,194)                     229        666    0.3    0.1    99.9  100.0
+        evalBoard                        Main                      app\Main.hs:108:1-241                             246      77635    0.3    0.1    98.6   99.0
+         evalBoardRowWise                Main                      app\Main.hs:97:1-80                               252     310537    5.9    7.7    64.1   49.0
+          evalChain                      Main                      app\Main.hs:(82,1)-(86,15)                        282    4989836    0.8    0.0     0.8    0.0
+          getChainsRowWise               Main                      app\Main.hs:92:1-80                               253     310537    3.0    4.5    57.4   41.4
+           getSymbGroups                 Main                      app\Main.hs:91:1-95                               254     310537    3.8    4.1    54.4   36.9
+            splitOneOf                   Data.List.Split.Internals src\Data\List\Split\Internals.hs:400:1-39         257    4968583    2.0    0.8    34.1   23.9
+             split                       Data.List.Split.Internals src\Data\List\Split\Internals.hs:249:1-68         258    4968583    8.0    9.8    32.1   23.1
+              splitInternal              Data.List.Split.Internals src\Data\List\Split\Internals.hs:(139,1)-(148,70) 271    4989842    1.1    0.0     1.8    0.2
+               splitInternal.(...)       Data.List.Split.Internals src\Data\List\Split\Internals.hs:144:3-31         312      61366    0.0    0.0     0.7    0.1
+                breakDelim               Data.List.Split.Internals src\Data\List\Split\Internals.hs:(151,1)-(156,36) 313     109830    0.1    0.1     0.7    0.1
+                 matchDelim              Data.List.Split.Internals src\Data\List\Split\Internals.hs:(73,1)-(77,23)   315      90984    0.1    0.0     0.5    0.0
+                  matchDelim.\           Data.List.Split.Internals src\Data\List\Split\Internals.hs:76:60-71         324      21260    0.0    0.0     0.0    0.0
+                  oneOf                  Data.List.Split.Internals src\Data\List\Split\Internals.hs:261:1-70         320          0    0.4    0.0     0.4    0.0
+                 breakDelim.(...)        Data.List.Split.Internals src\Data\List\Split\Internals.hs:155:25-52        329      48464    0.0    0.0     0.0    0.0
+                 breakDelim.match        Data.List.Split.Internals src\Data\List\Split\Internals.hs:155:25-52        328      48464    0.0    0.0     0.0    0.0
+                 breakDelim.ys           Data.List.Split.Internals src\Data\List\Split\Internals.hs:155:25-52        330      48464    0.0    0.0     0.0    0.0
+               splitInternal.match       Data.List.Split.Internals src\Data\List\Split\Internals.hs:144:3-31         325      61366    0.0    0.0     0.0    0.0
+               splitInternal.toSplitList Data.List.Split.Internals src\Data\List\Split\Internals.hs:(146,3)-(148,70) 326      61366    0.0    0.0     0.0    0.0
+               splitInternal.xs          Data.List.Split.Internals src\Data\List\Split\Internals.hs:144:3-31         311      61366    0.0    0.0     0.0    0.0
+              fromElem                   Data.List.Split.Internals src\Data\List\Split\Internals.hs:(116,1)-(117,24) 283    4989836    0.8    0.0     0.8    0.0
+              postProcess                Data.List.Split.Internals src\Data\List\Split\Internals.hs:(163,1)-(168,45) 259    4968582   13.3   10.6    21.4   13.1
+               condensePolicy            Data.List.Split.Internals src\Data\List\Split\Internals.hs:32:30-43         270    4968582    0.5    0.0     0.5    0.0
+               delimPolicy               Data.List.Split.Internals src\Data\List\Split\Internals.hs:27:30-40         261    4968582    0.8    0.0     0.8    0.0
+               doCondense                Data.List.Split.Internals src\Data\List\Split\Internals.hs:(178,1)-(183,20) 269    4968582    0.6    0.0     0.6    0.0
+               doDrop                    Data.List.Split.Internals src\Data\List\Split\Internals.hs:(172,1)-(173,14) 276    4968582    2.5    2.5     2.5    2.5
+               doMerge                   Data.List.Split.Internals src\Data\List\Split\Internals.hs:(205,1)-(207,14) 260    4968582    0.7    0.0     0.7    0.0
+               dropFinal                 Data.List.Split.Internals src\Data\List\Split\Internals.hs:(236,1)-(241,26) 279    4968582    0.6    0.0     0.6    0.0
+               dropInitial               Data.List.Split.Internals src\Data\List\Split\Internals.hs:(231,1)-(232,19) 277    4968582    0.3    0.0     0.3    0.0
+               finalBlankPolicy          Data.List.Split.Internals src\Data\List\Split\Internals.hs:37:30-45         280    4968582    0.5    0.0     0.5    0.0
+               initBlankPolicy           Data.List.Split.Internals src\Data\List\Split\Internals.hs:35:30-44         278    4968582    1.0    0.0     1.0    0.0
+               insertBlanks              Data.List.Split.Internals src\Data\List\Split\Internals.hs:(189,1)-(191,38) 275    4968582    0.5    0.0     0.6    0.0
+                insertBlanks'            Data.List.Split.Internals src\Data\List\Split\Internals.hs:(195,1)-(201,49) 327     102002    0.1    0.0     0.1    0.0
+              delimiter                  Data.List.Split.Internals src\Data\List\Split\Internals.hs:25:30-38         314      59881    0.0    0.0     0.0    0.0
+             oneOf                       Data.List.Split.Internals src\Data\List\Split\Internals.hs:261:1-70         262    4968582    0.0    0.0     0.0    0.0
+            indicesDiffsInRows           Main                      app\Main.hs:89:1-73                               255     310537    2.3    3.7    16.5    8.9
+             diffs                       Main                      app\Main.hs:(69,1)-(70,35)                        272    4968582    1.1    0.1     1.1    0.1
+             indicesInRows               Main                      app\Main.hs:88:1-62                               256     310537   13.1    5.1    13.1    5.1
+              ==                         Main                      app\Main.hs:15:22-23                              273   37574922    0.0    0.0     0.0    0.0
+         evalMid                         Main                      app\Main.hs:105:1-112                             247      77635    0.3    0.0     2.5    3.3
+          ==                             Main                      app\Main.hs:15:22-23                              251    1940875    0.0    0.0     0.0    0.0
+          middle                         Main                      app\Main.hs:103:1-94                              248      77635    0.1    0.0     2.2    3.3
+           getCutBoard                   Main                      app\Main.hs:101:1-92                              249      77635    0.5    1.3     2.1    3.2
+            takeRange                    Main                      app\Main.hs:100:1-85                              250     465810    1.6    2.0     1.6    2.0
+         diagonalsCw                     Main                      app\Main.hs:95:1-46                               290      77634    0.1    0.0    16.8   23.4
+          cwRotate                       Main                      app\Main.hs:67:1-34                               293          0    9.2   12.7     9.2   12.7
+          diagonals                      Data.Universe.Helpers     Data\Universe\Helpers.hs:(39,1)-(45,41)           291          0    0.0    0.0     7.5   10.7
+           diagonals.go                  Data.Universe.Helpers     Data\Universe\Helpers.hs:(42,9)-(45,41)           292     931608    5.9    8.1     7.5   10.6
+            diagonals.go.ts              Data.Universe.Helpers     Data\Universe\Helpers.hs:45:23-41                 294     931608    1.6    2.5     1.6    2.5
+         cwRotate                        Main                      app\Main.hs:67:1-34                               285          0    7.1   12.7     7.1   12.7
+         diagonals                       Data.Universe.Helpers     Data\Universe\Helpers.hs:(39,1)-(45,41)           287          0    0.0    0.0     7.7   10.7
+          diagonals.go                   Data.Universe.Helpers     Data\Universe\Helpers.hs:(42,9)-(45,41)           288     931608    5.8    8.1     7.7   10.6
+           diagonals.go.ts               Data.Universe.Helpers     Data\Universe\Helpers.hs:45:23-41                 289     931608    1.9    2.5     1.9    2.5
+        availNextBoards                  Main                      app\Main.hs:116:1-150                             231        666    0.1    0.1     1.1    0.9
+         changeElem                      Main                      app\Main.hs:(75,1)-(78,34)                        240      78295    0.2    0.1     0.8    0.6
+          changeElem.modified_row        Main                      app\Main.hs:77:9-54                               242      78295    0.0    0.0     0.4    0.3
+           replace                       Main                      app\Main.hs:73:1-70                               243      78295    0.3    0.3     0.3    0.3
+          changeElem.row_to_replace_in   Main                      app\Main.hs:76:9-37                               244      78295    0.0    0.0     0.0    0.0
+          replace                        Main                      app\Main.hs:73:1-70                               241      78295    0.3    0.3     0.3    0.3
+         availMoves                      Main                      app\Main.hs:112:1-149                             232        666    0.1    0.1     0.1    0.1
+          availMovesBasis                Main                      app\Main.hs:111:1-81                              235        666    0.0    0.1     0.0    0.1
+           ==                            Main                      app\Main.hs:15:22-23                              236      80531    0.0    0.0     0.0    0.0
+        oppositeCell                     Main                      app\Main.hs:(21,1)-(23,27)                        274          6    0.0    0.0     0.0    0.0
+       getTail                           Main                      app\Main.hs:174:1-28                              230          6    0.0    0.0     0.0    0.0
+   show                                  Main                      app\Main.hs:38:5-74                               205          6    0.0    0.0     0.0    0.0
+    dispRow                              Main                      app\Main.hs:62:1-49                               210         66    0.0    0.0     0.0    0.0
+     toString                            Main                      app\Main.hs:(17,1)-(19,16)                        219        726    0.0    0.0     0.0    0.0
+   mainLoop.nextBoard                    Main                      app\Main.hs:152:9-50                              302          5    0.0    0.0     0.0    0.0
+    getNode                              Main                      app\Main.hs:172:1-22                              303          5    0.0    0.0     0.0    0.0
+   mainLoop.trtail                       Main                      app\Main.hs:149:9-72                              295          5    0.0    0.0     0.0    0.0
+    generateGameTreeDepths               Main                      app\Main.hs:(119,1)-(120,194)                     296          5    0.0    0.0     0.0    0.0
+     availNextBoards                     Main                      app\Main.hs:116:1-150                             298          5    0.0    0.0     0.0    0.0
+      availMoves                         Main                      app\Main.hs:112:1-149                             299          5    0.0    0.0     0.0    0.0
+       availMovesBasis                   Main                      app\Main.hs:111:1-81                              300          5    0.0    0.0     0.0    0.0
+        ==                               Main                      app\Main.hs:15:22-23                              301        363    0.0    0.0     0.0    0.0
+      changeElem                         Main                      app\Main.hs:(75,1)-(78,34)                        304          5    0.0    0.0     0.0    0.0
+       changeElem.modified_row           Main                      app\Main.hs:77:9-54                               306          5    0.0    0.0     0.0    0.0
+        replace                          Main                      app\Main.hs:73:1-70                               307          5    0.0    0.0     0.0    0.0
+       changeElem.row_to_replace_in      Main                      app\Main.hs:76:9-37                               308          5    0.0    0.0     0.0    0.0
+       replace                           Main                      app\Main.hs:73:1-70                               305          5    0.0    0.0     0.0    0.0
+    getTail                              Main                      app\Main.hs:174:1-28                              297          5    0.0    0.0     0.0    0.0
+   oppositeCell                          Main                      app\Main.hs:(21,1)-(23,27)                        310          5    0.0    0.0     0.0    0.0

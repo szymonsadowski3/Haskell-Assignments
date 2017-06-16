@@ -1,0 +1,51 @@
+	Fri Jun 16 15:48 2017 Time and Allocation Profiling Report  (Final)
+
+	   GOM-exe.EXE +RTS -N -p -N -RTS -flagBefore -flagAfter
+
+	total time  =        0.01 secs   (6 ticks @ 1000 us, 1 processor)
+	total alloc =  87,696,168 bytes  (excludes profiling overheads)
+
+COST CENTRE             MODULE SRC                            %time %alloc
+
+generateAvailableBoards Main   app\Main.hs:175:1-164           33.3   15.5
+findAvailableMoves      Main   app\Main.hs:173:1-130           33.3   22.6
+MAIN                    MAIN   <built-in>                      16.7    0.0
+getNodes                Main   app\Main.hs:(21,1)-(22,71)      16.7   30.9
+generateGameTreeDepths  Main   app\Main.hs:(200,1)-(201,261)    0.0   26.2
+replaceElem             Main   app\Main.hs:16:1-74              0.0    4.8
+
+
+                                                                                                      individual      inherited
+COST CENTRE                 MODULE                   SRC                           no.     entries  %time %alloc   %time %alloc
+
+MAIN                        MAIN                     <built-in>                    113          0   16.7    0.0   100.0  100.0
+ CAF                        GHC.IO.Encoding.CodePage <entire-module>               211          0    0.0    0.0     0.0    0.0
+ CAF                        GHC.IO.Encoding          <entire-module>               204          0    0.0    0.0     0.0    0.0
+ CAF                        GHC.Conc.Windows         <entire-module>               201          0    0.0    0.0     0.0    0.0
+ CAF                        GHC.IO.Handle.Text       <entire-module>               195          0    0.0    0.0     0.0    0.0
+ CAF                        GHC.IO.Handle.FD         <entire-module>               194          0    0.0    0.0     0.0    0.0
+ CAF:isqrt                  Main                     app\Main.hs:78:1-5            141          0    0.0    0.0     0.0    0.0
+  isqrt                     Main                     app\Main.hs:78:1-35           239          1    0.0    0.0     0.0    0.0
+ CAF:main1                  Main                     <no location info>            159          0    0.0    0.0     0.0    0.0
+  main                      Main                     app\Main.hs:(207,1)-(209,76)  226          1    0.0    0.0     0.0    0.0
+ CAF:main2                  Main                     <no location info>            158          0    0.0    0.0     0.0    0.0
+  main                      Main                     app\Main.hs:(207,1)-(209,76)  228          0    0.0    0.0     0.0    0.0
+ CAF:main3                  Main                     <no location info>            157          0    0.0    0.0     0.0    0.0
+  main                      Main                     app\Main.hs:(207,1)-(209,76)  229          0    0.0    0.0     0.0    0.0
+ CAF:main4                  Main                     <no location info>            156          0    0.0    0.0    16.7   30.9
+  main                      Main                     app\Main.hs:(207,1)-(209,76)  230          0    0.0    0.0    16.7   30.9
+   getNodes                 Main                     app\Main.hs:(21,1)-(22,71)    231     130322   16.7   30.9    16.7   30.9
+ CAF:main5                  Main                     <no location info>            155          0    0.0    0.0    66.7   69.1
+  main                      Main                     app\Main.hs:(207,1)-(209,76)  232          0    0.0    0.0    66.7   69.1
+   generateGameTreeDepths   Main                     app\Main.hs:(200,1)-(201,261) 233        362    0.0   26.2    66.7   69.1
+    generateAvailableBoards Main                     app\Main.hs:175:1-164         234        362   33.3   15.5    66.7   42.8
+     findAvailableMoves     Main                     app\Main.hs:173:1-130         235        362   33.3   22.6    33.3   22.6
+      ==                    Main                     app\Main.hs:53:22-23          237     130682    0.0    0.0     0.0    0.0
+      boardHowManyRows      Main                     app\Main.hs:93:1-45           238          1    0.0    0.0     0.0    0.0
+       isqrt                Main                     app\Main.hs:78:1-35           240          0    0.0    0.0     0.0    0.0
+     replaceElem            Main                     app\Main.hs:16:1-74           243        361    0.0    4.8     0.0    4.8
+     boardHowManyRows       Main                     app\Main.hs:93:1-45           241          1    0.0    0.0     0.0    0.0
+      isqrt                 Main                     app\Main.hs:78:1-35           242          0    0.0    0.0     0.0    0.0
+ CAF:soblank                Main                     app\Main.hs:46:1-7            135          0    0.0    0.0     0.0    0.0
+  soblank                   Main                     app\Main.hs:46:1-4703         236          1    0.0    0.0     0.0    0.0
+ main                       Main                     app\Main.hs:(207,1)-(209,76)  227          0    0.0    0.0     0.0    0.0
